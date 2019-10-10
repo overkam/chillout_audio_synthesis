@@ -1,0 +1,70 @@
+.maincontainer {
+    position: relative;
+    height: 250 px;
+}
+
+#frequency {
+    margin-top: 20px;
+}
+
+
+.firstButton {
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: #008B8B;
+  transition: 0.2s;
+} 
+.firstButton:hover { background: #2F4F4F; }
+.firstButton:active {
+  background: #2F4F4F;
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+
+
+.furstButton {
+  color: #fff; /* цвет текста */
+  text-decoration: none; /* убирать подчёркивание у ссылок */
+  user-select: none; /* убирать выделение текста */
+  background: rgb(212,75,56); /* фон кнопки */
+  padding: .7em 1.5em; /* отступ от текста */
+  outline: none; /* убирать контур в Mozilla */
+} 
+
+.slider {
+    position: absolute;               /* 2 */
+    top: 50%;                         /* 3 */
+    left: 20%;
+    transform: translate(0, -50%)
+    vertical-align: middle;
+    -webkit-appearance: none;
+    width: 20%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #A9A9A9;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; 
+    background: #008B8B;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #008B8B;
+    cursor: pointer;
+}
