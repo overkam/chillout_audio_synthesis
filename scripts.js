@@ -1,3 +1,8 @@
+//TODO: добавить проверку на корректность ввода нот, в случае ошибки выкидывать варн и не начинать исполнение мелодии
+//TODO: запускать мелодию циклично с интервалом N между повторами (!!!)
+//TODO: добавить возможность добавлять дополнительные дорожки и кнопку запуска всех дорожек одновременно
+//TODO: разработать синтетические инструменты (отличаются от "оригинала" длиной ноты, интервалом между нот и заданным изменением в частоте)
+//TODO: добавить 2-3 эффекта (???)
 
 class Sound {
 
@@ -22,22 +27,40 @@ class Sound {
     }
 }
 
+let timerId;
+let isPlaying = false;
 function playpause() {
+    
+    let interval = 1000;
+    let strfreq = document.getElementById("notes").value;
+    let volume = document.getElementById("volumeChange").value;
+    let notesArray = strfreq.split(' ');
+    if (notesArray=="") return;
+    let duration = (notesArray.length)*1000 + interval;
+
+    if (!isPlaying) {
+        playMelody(notesArray, volume);
+        timerId = setInterval(playMelody, duration, notesArray, volume);
+    } else {
+        clearTimeout(timerId);
+    }
+    isPlaying=!isPlaying;
+}
+
+function playMelody(notesArray, volume) {
     let context = new AudioContext();
     let sound = new Sound(context); 
-    let strfreq = document.getElementById("frequency").value;
-    let volume = document.getElementById("volumeChange").value;
-    freqArray = strfreq.split(' ');
-    console.log(freqArray);
-    let numberOfSounds = freqArray.length;
-    console.log(numberOfSounds);
+
     let currentCount=0;
-    freqArray.forEach(function(element) {
+    notesArray.forEach(function(element) {
         let freq = map.get(element);
         sound.play(freq, currentCount, currentCount+1, volume);
-        currentCount++;
+        ++currentCount;
     })
 }
+
+
+
 
 let map = new Map();
 map.set('C0', 16.35);
