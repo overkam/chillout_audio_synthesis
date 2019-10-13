@@ -31,12 +31,13 @@ let timerId;
 let isPlaying = false;
 function playpause() {
     
-    let interval = 1000;
+    let interval = +document.getElementById("intervalValue").value;
     let strfreq = document.getElementById("notes").value;
     let volume = document.getElementById("volumeChange").value;
     let notesArray = strfreq.split(' ');
     if (notesArray=="") return;
     let duration = (notesArray.length)*1000 + interval;
+
 
     if (!isPlaying) {
         playMelody(notesArray, volume);
