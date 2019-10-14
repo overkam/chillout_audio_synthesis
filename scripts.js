@@ -26,15 +26,46 @@ class Sound {
     }
 }
 
+
+
+function button1() {
+    buttonAction(1);
+}
+function button2() {
+    buttonAction(2);
+}
+function button3() {
+    buttonAction(3);
+}
+
 let melodyTimer;
-let deltafreq;
-let notelength;
-function buttonAction() {
-    
-    let buttonText = document.getElementById("firstButton");
-    let strnotes = document.getElementById("notes").value;
-    let interval = document.getElementById("interval").value;
-    let instrument = document.getElementById("selectinst").value;
+let melodyTimer2;
+let melodyTimer3;
+function buttonAction(id) {
+
+    let buttonText, strnotes, interval, instrument;
+    let deltafreq, notelength;
+
+    switch (id) {
+        case (1):
+            buttonText = document.getElementById("playButton");
+            strnotes = document.getElementById("notes").value;
+            interval = document.getElementById("interval").value;
+            instrument = document.getElementById("selectinst").value;
+            break;
+        case (2):
+            buttonText = document.getElementById("playButton2");
+            strnotes = document.getElementById("notes2").value;
+            interval = document.getElementById("interval2").value;
+            instrument = document.getElementById("selectinst2").value;
+            break;
+        case (3):
+            buttonText = document.getElementById("playButton3");
+            strnotes = document.getElementById("notes3").value;
+            interval = document.getElementById("interval3").value;
+            instrument = document.getElementById("selectinst3").value;
+            break;
+    }
     
     switch (instrument) {
         case 'Default':
@@ -57,23 +88,53 @@ function buttonAction() {
 
     if (buttonText.value == "Start") {
         buttonText.value = "Stop";
-        playMelody(notesArray);
-        melodyTimer = setInterval(playMelody, duration, notesArray);
+        playMelody(notesArray, deltafreq, notelength, id);
+        switch (id) {
+            case (1):
+                melodyTimer = setInterval(playMelody, duration, notesArray, deltafreq, notelength, id);
+                break;
+            case (2):
+                melodyTimer2 = setInterval(playMelody, duration, notesArray, deltafreq, notelength, id);
+                break;
+            case (3):
+                melodyTimer3 = setInterval(playMelody, duration, notesArray, deltafreq, notelength, id);
+                break;
+        }
     } else {
         buttonText.value = "Start";
-        clearTimeout(melodyTimer);
+        switch (id) {
+            case (1):
+                clearTimeout(melodyTimer);
+                break;
+            case (2):
+                clearTimeout(melodyTimer2);
+                break;
+            case (3):
+                clearTimeout(melodyTimer3);
+                break;
+        }
     }
 }
 
-function playMelody(notesArray) {
-
-    let volume = document.getElementById("volumeChange").value;
+function playMelody(notesArray, deltafreq, notelength, id) {
+    let volume;
+    switch (id) {
+        case (1):
+            volume = document.getElementById("volumeChange").value;
+            break;
+        case (2):
+            volume = document.getElementById("volumeChange2").value;
+            break;
+        case (3):
+            volume = document.getElementById("volumeChange3").value;
+            break;
+    }
     let context = new AudioContext();
     let sound = new Sound(context); 
     let currentCount=0;
 
     notesArray.forEach(function(element) {
-        let freq = map.get(element);
+        let freq = map.get(element); 
         sound.play(freq+deltafreq, currentCount, currentCount+notelength, volume);
         currentCount+=notelength;
     })
@@ -86,60 +147,60 @@ function playMelody(notesArray) {
 
 
 
-class Elements {
-    constructor(){
-        this.wrapper = null;
+// class Elements {
+//     constructor(){
+//         this.wrapper = null;
 
-        this.appendToWrapper();
-    }
-    static get CSS() {
-            return {
-                maincontainerClass : "maincontainer",
-                buttonWrapperClass : "buttonWrapper",
-                notesWrapperClass : "notesWrapper",
-                intervalWrapperClass : "intervalWapper",
-                volumeWrapperClass : "volumeWrapper"
-            }
-    }    
+//         this.appendToWrapper();
+//     }
+//     static get CSS() {
+//             return {
+//                 maincontainerClass : "maincontainer",
+//                 buttonWrapperClass : "buttonWrapper",
+//                 notesWrapperClass : "notesWrapper",
+//                 intervalWrapperClass : "intervalWapper",
+//                 volumeWrapperClass : "volumeWrapper"
+//             }
+//     }    
 
-    make(tagName, elementType, ClassName) {
-        var element = document.createElement(tagName);
-        if (!elementType) {element.type = elementType}
-        element.classList.add(ClassName);
-        return element;
-    }
+//     make(tagName, elementType, ClassName) {
+//         var element = document.createElement(tagName);
+//         if (!elementType) {element.type = elementType}
+//         element.classList.add(ClassName);
+//         return element;
+//     }
 
-    appendToWrapper() {
-        this.wrapper = this.make('div', null, Elements.CSS.maincontainerClass)
-        let playList = document.getElementById('playList');
-        console.log(playList);
-        playList.appendChild(this.wrapper);
+//     appendToWrapper() {
+//         this.wrapper = this.make('div', null, Elements.CSS.maincontainerClass)
+//         let playList = document.getElementById('playList');
+//         console.log(playList);
+//         playList.appendChild(this.wrapper);
 
-        this.buttonWrapper = this.make('div', null, Elements.CSS.buttonWrapperClass)
-        console.log(this.buttonWrapper);
-        this.wrapper.appendChild(this.buttonWrapper);
+//         this.buttonWrapper = this.make('div', null, Elements.CSS.buttonWrapperClass)
+//         console.log(this.buttonWrapper);
+//         this.wrapper.appendChild(this.buttonWrapper);
 
-        this.notesWrapper = this.make('div', null, Elements.CSS.notesWrapperClass)
-        console.log(this.notesWrapper);
-        this.wrapper.appendChild(this.notesWrapper);
+//         this.notesWrapper = this.make('div', null, Elements.CSS.notesWrapperClass)
+//         console.log(this.notesWrapper);
+//         this.wrapper.appendChild(this.notesWrapper);
 
-        this.intervalWrapper = this.make('div', null, Elements.CSS.intervalWrapperClass)
-        console.log(this.intervalWrapper);
-        this.wrapper.appendChild(this.intervalWrapper);
+//         this.intervalWrapper = this.make('div', null, Elements.CSS.intervalWrapperClass)
+//         console.log(this.intervalWrapper);
+//         this.wrapper.appendChild(this.intervalWrapper);
 
-        this.volumeWrapper = this.make('div', null, Elements.CSS.volumeWrapperClass)
-        console.log(this.volumeWrapper);
-        this.wrapper.appendChild(this.volumeWrapper);
-    }
+//         this.volumeWrapper = this.make('div', null, Elements.CSS.volumeWrapperClass)
+//         console.log(this.volumeWrapper);
+//         this.wrapper.appendChild(this.volumeWrapper);
+//     }
 
-    appendElementsToWrapper() {
+//     appendElementsToWrapper() {
         
-    }
-}
+//     }
+// }
 
-function addTrack() {
-    let newTrack = new Elements();
-}
+// function addTrack() {
+//     let newTrack = new Elements();
+// }
 
 
 

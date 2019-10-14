@@ -8,13 +8,11 @@
 <body>  
 	<script type="notepagejs.js"></script>
 	<script src="scripts.js"></script>
-	<div id="playList">
+	<div id="playLists">
 		<div class="maincontainer">
-			<input type="button" id="firstButton" onclick="buttonAction()" value="Start"></input>
-
+			<input type="button" id="playButton" onclick="button1()" value="Start"></input>
 			<input type="text" id="notes" value="A4 F4 A4">
-
-			<input type="text" id="interval" value="1000">
+			<input type="text" class="intervalclass" id="interval" value="1000">
 
 			<select id="selectinst">
 				<option>Default</option>
@@ -22,9 +20,38 @@
 				<option>Instrument 2</option>
 			</select>
 
-			<input type="range" class="slider" id="volumeChange" min="0" max="1" step="0.01" value="0.5" id="volumeChange">
+			<input type="range" class="slider" id="volumeChange" min="0" max="1" step="0.01" value="0.5">
 		</div>
-		<button id="addTrack" onclick="addTrack()">+</button>
+
+
+		<div class="notmaincontainer">
+			<input type="button" id="playButton2" onclick="button2()" value="Start"></input>
+			<input type="text" id="notes2" value="A4 F4 A4">
+			<input type="text" class="intervalclass" id="interval2" value="1000">
+
+			<select id="selectinst2">
+				<option>Default</option>
+				<option>Instrument 1</option>
+				<option>Instrument 2</option>
+			</select>
+
+			<input type="range" class="slider" id="volumeChange2" min="0" max="1" step="0.01" value="0.5">
+		</div>
+
+
+		<div class="notmaincontainer">
+			<input type="button" id="playButton3" onclick="button3()" value="Start"></input>
+			<input type="text" id="notes3" value="A4 F4 A4">
+			<input type="text" class="intervalclass" id="interval3" value="1000">
+
+			<select id="selectinst3">
+				<option>Default</option>
+				<option>Instrument 1</option>
+				<option>Instrument 2</option>
+			</select>
+
+			<input type="range" class="slider" id="volumeChange3" min="0" max="1" step="0.01" value="0.5">
+		</div>
 	</div>
 </body>
 </html>

@@ -5,8 +5,15 @@
   height: 250 px; 
 }
 
+.notmaincontainer {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: rgb(182, 226, 253);
+  height: 250 px; 
+}
 
-#firstButton {
+
+input[type="button"] {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -21,8 +28,8 @@
   transition: 0.2s;
   outline: none;
 } 
-#firstButton:hover { background: rgb(54, 95, 95); }
-#firstButton:active {
+input[type="button"]:hover { background: rgb(54, 95, 95); }
+input[type="button"]:active {
   background: rgba(54, 95, 95, 0.829);
 }
 
@@ -33,7 +40,7 @@ input[type="text"] {
 }
 input[type="text"]:focus { outline: none; }
 
-#interval {
+.intervalclass {
   text-align: center;
   width: 55px;
   margin-left: 30px;
@@ -77,18 +84,3 @@ select {
   cursor: pointer;
 }
 
-
-.buttonWrapper {
-  padding: 20px;
-  background-color: rgb(225, 225, 225);
-  height: 250 px;
-}
-
-#notes {
-  font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  padding: 2px 4px;
-}
-
-#notes:focus {
-  outline: none;
-}
