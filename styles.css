@@ -1,8 +1,15 @@
 .maincontainer {
-  margin-top: 200px;
+  margin-top: 20px;
   padding: 20px;
   background-color: rgb(182, 226, 253);
   height: 250 px; 
+}
+
+.buttonWrapper {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgb(225, 225, 225);
+  height: 250 px;
 }
 
 #notes {
