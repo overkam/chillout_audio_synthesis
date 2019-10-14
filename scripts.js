@@ -53,28 +53,42 @@ class Elements {
     appendToWrapper() {
         this.wrapper = this.make('div', null, Elements.CSS.maincontainerClass)
         let playList = document.getElementById('playList');
-        console.log(playList);
         playList.appendChild(this.wrapper);
 
+
         this.buttonWrapper = this.make('div', null, Elements.CSS.buttonWrapperClass)
-        console.log(this.buttonWrapper);
         this.wrapper.appendChild(this.buttonWrapper);
 
         this.notesWrapper = this.make('div', null, Elements.CSS.notesWrapperClass)
-        console.log(this.notesWrapper);
         this.wrapper.appendChild(this.notesWrapper);
 
         this.intervalWrapper = this.make('div', null, Elements.CSS.intervalWrapperClass)
-        console.log(this.intervalWrapper);
         this.wrapper.appendChild(this.intervalWrapper);
 
         this.volumeWrapper = this.make('div', null, Elements.CSS.volumeWrapperClass)
-        console.log(this.volumeWrapper);
         this.wrapper.appendChild(this.volumeWrapper);
+
+        this.appendElementsToWrapper();
     }
 
     appendElementsToWrapper() {
-        
+        this.button = this.make('input', 'button', 'firstButton');
+        this.buttonWrapper.appendChild(this.button);
+        this.button.addEventListener("click", playpause);
+        this.button.value = "Play";
+
+        this.notes = this.make('input', 'text', 'notes');
+        this.notesWrapper.appendChild(this.notes);
+        this.notes.value = 'C5 D5 E5 F5 G5';
+
+        this.interval = this.make('input', 'text', 'interval');
+        this.intervalWrapper.appendChild(this.interval);
+        this.interval.value = '500';
+
+        this.volume = this.make('input', 'range', 'slider');
+        this.volumeWrapper.appendChild(this.volume);
+        console.log(this.volume.type);
+        this.volume.value = '0.2';
     }
 }
 

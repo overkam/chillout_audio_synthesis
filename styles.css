@@ -6,15 +6,16 @@
 }
 
 .buttonWrapper {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: rgb(225, 225, 225);
-  height: 250 px;
+  width: 70px;
+  height: 45px;
+}
+
+.notesWrapper {
+  font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  padding: 2px 4px;
 }
 
 #notes {
-  font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  padding: 2px 4px;
 }
 
 #notes:focus {
@@ -53,6 +54,16 @@
   transition: opacity .2s;
 }
 
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; 
+  background: #008B8B;
+  cursor: pointer;
+}
+
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -70,3 +81,5 @@
   background: #008B8B;
   cursor: pointer;
 }
+
+
