@@ -1,5 +1,4 @@
 //TODO: добавить проверку на корректность ввода нот, в случае ошибки выкидывать варн и не начинать исполнение мелодии
-//TODO: запускать мелодию циклично с интервалом N между повторами (!!!)
 //TODO: добавить возможность добавлять дополнительные дорожки и кнопку запуска всех дорожек одновременно
 //TODO: разработать синтетические инструменты (отличаются от "оригинала" длиной ноты, интервалом между нот и заданным изменением в частоте)
 //TODO: добавить 2-3 эффекта (???)
@@ -22,42 +21,65 @@ class Sound {
         this.init();
         this.gainNode.gain.value = volumeValue;
         this.oscillator.frequency.value = value;
+
         this.oscillator.start(startTime);
         this.oscillator.stop(stopTime); 
     }
 }
 
-let timerId;
-let isPlaying = false;
-function playpause() {
+let melodyTimer;
+let deltafreq;
+let notelength;
+function buttonAction() {
     
-    let interval = 1000;
-    let strfreq = document.getElementById("notes").value;
-    let volume = document.getElementById("volumeChange").value;
-    let notesArray = strfreq.split(' ');
-    if (notesArray=="") return;
-    let duration = (notesArray.length)*1000 + interval;
-
-    if (!isPlaying) {
-        playMelody(notesArray, volume);
-        timerId = setInterval(playMelody, duration, notesArray, volume);
-    } else {
-        clearTimeout(timerId);
+    let buttonText = document.getElementById("firstButton");
+    let strnotes = document.getElementById("notes").value;
+    let interval = document.getElementById("interval").value;
+    let instrument = document.getElementById("selectinst").value;
+    
+    switch (instrument) {
+        case 'Default':
+            deltafreq=0;
+            notelength=1;
+            break;
+        case 'Instrument 1':
+            deltafreq=-70;
+            notelength=1.2;
+            break;
+        case 'Instrument 2':
+            deltafreq=100;
+            notelength=0.6;
+            break;
     }
-    isPlaying=!isPlaying;
+
+    let notesArray = strnotes.split(' ');
+    if (notesArray=="") return;
+    let duration = (notesArray.length)*notelength*1000 + Number(interval);
+
+    if (buttonText.value == "Start") {
+        buttonText.value = "Stop";
+        playMelody(notesArray);
+        melodyTimer = setInterval(playMelody, duration, notesArray);
+    } else {
+        buttonText.value = "Start";
+        clearTimeout(melodyTimer);
+    }
 }
 
-function playMelody(notesArray, volume) {
+function playMelody(notesArray) {
+
+    let volume = document.getElementById("volumeChange").value;
     let context = new AudioContext();
     let sound = new Sound(context); 
-
     let currentCount=0;
+
     notesArray.forEach(function(element) {
         let freq = map.get(element);
-        sound.play(freq, currentCount, currentCount+1, volume);
-        ++currentCount;
+        sound.play(freq+deltafreq, currentCount, currentCount+notelength, volume);
+        currentCount+=notelength;
     })
 }
+
 
 
 
