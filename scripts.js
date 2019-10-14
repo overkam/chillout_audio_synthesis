@@ -1,6 +1,5 @@
 //TODO: добавить проверку на корректность ввода нот, в случае ошибки выкидывать варн и не начинать исполнение мелодии
 //TODO: добавить возможность добавлять дополнительные дорожки и кнопку запуска всех дорожек одновременно
-//TODO: разработать синтетические инструменты (отличаются от "оригинала" длиной ноты, интервалом между нот и заданным изменением в частоте)
 //TODO: добавить 2-3 эффекта (???)
 
 class Sound {
@@ -81,6 +80,66 @@ function playMelody(notesArray) {
 }
 
 
+
+
+
+
+
+
+class Elements {
+    constructor(){
+        this.wrapper = null;
+
+        this.appendToWrapper();
+    }
+    static get CSS() {
+            return {
+                maincontainerClass : "maincontainer",
+                buttonWrapperClass : "buttonWrapper",
+                notesWrapperClass : "notesWrapper",
+                intervalWrapperClass : "intervalWapper",
+                volumeWrapperClass : "volumeWrapper"
+            }
+    }    
+
+    make(tagName, elementType, ClassName) {
+        var element = document.createElement(tagName);
+        if (!elementType) {element.type = elementType}
+        element.classList.add(ClassName);
+        return element;
+    }
+
+    appendToWrapper() {
+        this.wrapper = this.make('div', null, Elements.CSS.maincontainerClass)
+        let playList = document.getElementById('playList');
+        console.log(playList);
+        playList.appendChild(this.wrapper);
+
+        this.buttonWrapper = this.make('div', null, Elements.CSS.buttonWrapperClass)
+        console.log(this.buttonWrapper);
+        this.wrapper.appendChild(this.buttonWrapper);
+
+        this.notesWrapper = this.make('div', null, Elements.CSS.notesWrapperClass)
+        console.log(this.notesWrapper);
+        this.wrapper.appendChild(this.notesWrapper);
+
+        this.intervalWrapper = this.make('div', null, Elements.CSS.intervalWrapperClass)
+        console.log(this.intervalWrapper);
+        this.wrapper.appendChild(this.intervalWrapper);
+
+        this.volumeWrapper = this.make('div', null, Elements.CSS.volumeWrapperClass)
+        console.log(this.volumeWrapper);
+        this.wrapper.appendChild(this.volumeWrapper);
+    }
+
+    appendElementsToWrapper() {
+        
+    }
+}
+
+function addTrack() {
+    let newTrack = new Elements();
+}
 
 
 
